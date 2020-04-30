@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Dominik\\Projekty\\PortalRandkowy\\PortalRandkowy.API\\PortalRandkowy.API.csproj": {}
+    "C:\\Users\\Dominik\\Projekty\\PortalRandkowy\\portalrandkowy.api\\PortalRandkowy.API.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Dominik\\Projekty\\PortalRandkowy\\PortalRandkowy.API\\PortalRandkowy.API.csproj": {
+    "C:\\Users\\Dominik\\Projekty\\PortalRandkowy\\portalrandkowy.api\\PortalRandkowy.API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Dominik\\Projekty\\PortalRandkowy\\PortalRandkowy.API\\PortalRandkowy.API.csproj",
+        "projectUniqueName": "C:\\Users\\Dominik\\Projekty\\PortalRandkowy\\portalrandkowy.api\\PortalRandkowy.API.csproj",
         "projectName": "PortalRandkowy.API",
-        "projectPath": "C:\\Users\\Dominik\\Projekty\\PortalRandkowy\\PortalRandkowy.API\\PortalRandkowy.API.csproj",
+        "projectPath": "C:\\Users\\Dominik\\Projekty\\PortalRandkowy\\portalrandkowy.api\\PortalRandkowy.API.csproj",
         "packagesPath": "C:\\Users\\Dominik\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Dominik\\Projekty\\PortalRandkowy\\PortalRandkowy.API\\obj\\",
+        "outputPath": "C:\\Users\\Dominik\\Projekty\\PortalRandkowy\\portalrandkowy.api\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Dominik\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -37,6 +37,16 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[3.1.3, )"
+            },
+            "Microsoft.EntityFrameworkCore.Sqlite": {
+              "target": "Package",
+              "version": "[3.1.3, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
