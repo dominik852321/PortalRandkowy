@@ -12,7 +12,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using PortalRandkowy.API.Data;
-
+using PortalRandkowy.API.Interfaces;
+using PortalRandkowy.API.Repository;
 
 namespace PortalRandkowy.API
 {
@@ -29,8 +30,12 @@ namespace PortalRandkowy.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<DataContext>(x => x.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddScoped<IAuthRepository, AuthRepository>();
+            
+            
             services.AddCors();
             services.AddControllers();
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
