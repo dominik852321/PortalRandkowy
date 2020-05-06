@@ -19,21 +19,14 @@ namespace PortalRandkowy.API.Controllers
     [ApiController]
     public class AuthController: ControllerBase
     {
-        private readonly DataContext _dataContext;
         public readonly IAuthRepository _repositoryAuth;
         public readonly IConfiguration _config ;
 
-        public AuthController(IAuthRepository repository, DataContext dataContext,
-                              IConfiguration config)
+        public AuthController(IAuthRepository repository, IConfiguration config)
         {
-            _dataContext= dataContext;
             _config = config;
             _repositoryAuth = repository;
         }
-
-        [HttpGet]
-        public async Task<IEnumerable<User>> Get()
-               => await _dataContext.Users.ToListAsync();
 
 
         [HttpPost("register")]

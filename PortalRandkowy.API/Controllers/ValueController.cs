@@ -61,7 +61,6 @@ namespace PortalRandkowy.API.Controllers
                 await _dataContext.SaveChangesAsync();
                 return Ok();
             }
-
             return NoContent();
         }
 
