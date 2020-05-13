@@ -58,3 +58,6 @@ C:\Users\Dominik\Projekty\PortalRandkowy\portalrandkowy.api\bin\Debug\netcoreapp
 C:\Users\Dominik\Projekty\PortalRandkowy\portalrandkowy.api\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Protocols.dll
 C:\Users\Dominik\Projekty\PortalRandkowy\portalrandkowy.api\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
 C:\Users\Dominik\Projekty\PortalRandkowy\portalrandkowy.api\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
+C:\Users\Dominik\Projekty\PortalRandkowy\portalrandkowy.api\bin\Debug\netcoreapp3.1\Data\UserSeedData.json
+C:\Users\Dominik\Projekty\PortalRandkowy\portalrandkowy.api\bin\Debug\netcoreapp3.1\AutoMapper.dll
+C:\Users\Dominik\Projekty\PortalRandkowy\portalrandkowy.api\bin\Debug\netcoreapp3.1\AutoMapper.Extensions.Microsoft.DependencyInjection.dll

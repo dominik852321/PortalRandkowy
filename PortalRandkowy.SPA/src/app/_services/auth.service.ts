@@ -5,13 +5,14 @@ import { logging } from 'protractor';
 import { map } from 'rxjs/operators';
 import { from } from 'rxjs';
 import { decode } from 'punycode';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  baseUrl = "http://localhost:5000/api/auth";
+  baseUrl = environment.apiUrl + 'auth';
   jwtHelper = new JwtHelperService();
   decodedToken: any;
 

@@ -10,20 +10,20 @@ using PortalRandkowy.API.Model;
 
 namespace PortalRandkowy.API.Repository
 {
-    public class UserRespository: IUserRepository
+    public class UserRespository: GenericRepository, IUserRepository
     {
         public readonly DataContext _dataContext;
-        public UserRespository(DataContext dataContext)
+        public UserRespository(DataContext dataContext) : base(dataContext)
         {
             _dataContext = dataContext;
         }
 
         
         public async Task<IEnumerable<User>> GetAll()
-            =>await _dataContext.Users.ToListAsync();
+            =>await _dataContext.Users.Include(s=>s.Photos).ToListAsync();
 
         public async Task<User> GetUser(int id)
-            =>await _dataContext.Users.FirstOrDefaultAsync(s=>s.Userid==id);
+            =>await _dataContext.Users.Include(s=>s.Photos).FirstOrDefaultAsync(s=>s.Userid==id);
        
         
         public void DeleteUser(int id)
@@ -33,15 +33,8 @@ namespace PortalRandkowy.API.Repository
                _dataContext.SaveChanges();
         }
 
-        public async Task<User> EditUser(UserForEditDTO userToEdit)
-        {
-            var user = await _dataContext.Users.FirstOrDefaultAsync(s=>s.Userid==userToEdit.id);
-            user.UserName=userToEdit.Username;
-
-            _dataContext.Users.Update(user);
-            await _dataContext.SaveChangesAsync();
-            return user;
-        }
+        
+     
     }
 
 }

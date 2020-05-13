@@ -1,9 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "emZyQKkQDVNV1ypoaVinJawAipGwkKxOPmjzwD4wh2pcK81HJ6JJ9zn4FjVFO+OtBQykgRBM1a3WA2qv10LVFA==",
+  "dgSpecHash": "ZAF8PT5ffOfQY/Tn4uxX+efE068+216I6Pl7CuGxfX4VD0uNoAXS4/Zz4RC/9jBj/3eLBI5/U1uWmeugwlHmDw==",
   "success": true,
   "projectFilePath": "C:\\Users\\Dominik\\Projekty\\PortalRandkowy\\portalrandkowy.api\\PortalRandkowy.API.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\Dominik\\.nuget\\packages\\automapper\\9.0.0\\automapper.9.0.0.nupkg.sha512",
+    "C:\\Users\\Dominik\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\7.0.0\\automapper.extensions.microsoft.dependencyinjection.7.0.0.nupkg.sha512",
     "C:\\Users\\Dominik\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\3.1.3\\microsoft.aspnetcore.authentication.jwtbearer.3.1.3.nupkg.sha512",
     "C:\\Users\\Dominik\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\1.1.0\\microsoft.bcl.asyncinterfaces.1.1.0.nupkg.sha512",
     "C:\\Users\\Dominik\\.nuget\\packages\\microsoft.bcl.hashcode\\1.1.0\\microsoft.bcl.hashcode.1.1.0.nupkg.sha512",

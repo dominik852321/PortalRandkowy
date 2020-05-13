@@ -6,12 +6,12 @@ using PortalRandkowy.API.Model;
 
 namespace PortalRandkowy.API.Interfaces
 {
-    public interface IUserRepository
+    public interface IUserRepository: IGenericRepository
     {
          Task<IEnumerable<User>> GetAll();
          Task<User> GetUser(int id);
 
-         Task<User> EditUser(UserForEditDTO userToEdit);
+        
          void DeleteUser(int id);
          
 
