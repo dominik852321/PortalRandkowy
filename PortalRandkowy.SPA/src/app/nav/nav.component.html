@@ -1,28 +1,28 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom ">
 
     <div class="container">
-        <a class="navbar-brand" [routerLink]="['/home']">Portal randkowy</a>
+        <a class="navbar-brand " [routerLink]="['/home']"><span class="h3">Portal randkowy</span></a>
 
-        <ul class="navbar-nav mr-auto" *ngIf="loggedIn()">
+        <ul class="navbar-nav mr-auto h5" *ngIf="loggedIn()">
             <li class="nav-item" routerLinkActive="active">
-                <a class="nav-link" [routerLink]="['/użytkownicy']">Użytkownicy</a>
+                <a class="nav-link " [routerLink]="['/użytkownicy']">Użytkownicy</a>
             </li>
             <li class="nav-item" routerLinkActive="active">
-                <a class="nav-link" [routerLink]="['/polubienia']">Polubienia</a>
+                <a class="nav-link " [routerLink]="['/polubienia']">Polubienia</a>
             </li>
             <li class="nav-item" routerLinkActive="active">
-                <a class="nav-link" [routerLink]="['/wiadomości']">Wiadomości</a>
+                <a class="nav-link " [routerLink]="['/wiadomości']">Wiadomości</a>
             </li>
         </ul>
 
         <div *ngIf="loggedIn()" class="dropdown mr-4">
-            <button class="btn btn-secondary dropdown-toggle text-light" type="button" id="dropDownUser"
+            <button class="btn  dropdown-toggle text-dark" type="button" id="dropDownUser"
                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Witaj {{ authService.decodedToken?.unique_name | titlecase }}
+                <span class="h4">{{ authService.decodedToken?.unique_name | titlecase }}</span>
             </button>
             <div class="dropdown-menu" aria-labelledby="dropDownUser">
-                <a class="dropdown-item" href="#"><i class="fa fa-user"></i> Profil</a>
-                <a type="button" class="dropdown-item" (click)="logOut()"><i class="fa fa-sign-out"></i> Wyloguj</a>
+                <a class="dropdown-item" [routerLink]="['/profil']"><i class="fa fa-user h4"></i> Edytuj profil</a>
+                <a type="button" class="dropdown-item" (click)="logOut()"><i class="fa fa-sign-out h4"></i> Wyloguj</a>
             </div>
         </div>
 

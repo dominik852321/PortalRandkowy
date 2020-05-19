@@ -1,0 +1,49 @@
+.card {
+    width: 15rem;
+}
+
+.card:hover {
+    background-color:whitesmoke;
+}
+
+.card img {
+    transform: scale(1.0, 1.0);
+    transition-duration: 200ms;
+    transition-timing-function: ease-in-out;
+}
+.card:hover img{
+    transform: scale(1.2, 1.2);
+    transition-duration: 200ms;
+    transition-timing-function: ease-in-out;
+    opacity: 0.8;
+}
+.card-img-wrapper {
+    overflow: hidden;
+    position: relative;
+}
+
+.btn {
+    width: 2.5rem;
+    height: 2rem;
+    border-radius: 5px ;
+}
+
+.user-icons{
+    position: absolute;
+    bottom: -30%;
+    left: 0;
+    right: 0;
+    border-radius: 30%
+}
+
+.card-img-wrapper:hover .user-icons {
+   bottom: 0;
+}
+
+.animate {
+    transition: all .2s ease-in-out;
+}
+
+.card-img-top{
+    border-radius: 20%;
+}

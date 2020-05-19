@@ -1,0 +1,143 @@
+<div class="container mt-3">
+    <div class="row m-2">
+        <div class="col-sm-4">
+            <p class="h1">Twój profil - Edycja</p>
+        </div>
+        <div class="col-sm-8">
+            <div *ngIf="editForm.dirty" class="alert alert-info">
+                <p class="h5 m-auto"><strong>Informacje: </strong> Dokonałeś zmian, aby zapisać wciśnij przycisk "Zapisz
+                    zmiany"</p>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="card">
+                <div>
+                    <img class="card-img" src="{{user?.photoUrl}}">
+                </div>
+                <div class="card-body">
+                    <strong>Wiek</strong>
+                    <p>{{user.age}} </p>
+                    <strong>Płeć</strong>
+                    <p>{{user.gender}}</p>
+                    <strong>Miejscowość</strong>
+                    <p>{{user.city}} {{user.country}}</p>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-sm-8">
+            <form #editForm="ngForm" (ngSubmit)="updateUser()">
+                <div class="card">
+                    <div class="tab-panel">
+                        <tabset >
+                            <tab heading="Informacje - Edycja" >
+                                <div class="card-body row">
+                                    <div class="col-sm-5 text-center mr-auto">
+                                
+                                        <h5>Wzrost</h5>
+                                        <textarea class="form-control text-center" name="growth" rows="1" [(ngModel)]="user.growth"></textarea>
+                                
+                                        <h5>Kolor oczu</h5>
+                                        <textarea class="form-control text-center" name="colorEye" rows="1" [(ngModel)]="user.colorEye"></textarea>
+                                
+                                        <h5>Znak zodiaku</h5>
+                                        <textarea class="form-control text-center" name="zodiacSign" rows="1" [(ngModel)]="user.zodiacSign"></textarea>
+                                
+                                        <h5>Kolor skóry</h5>
+                                        <textarea class="form-control text-center" name="colorSkin" rows="1" [(ngModel)]="user.colorSkin"></textarea>
+                                
+                                    </div>
+                                    <div class="col-sm-5 text-center ml-auto">
+                                    
+                                        <h5>Status</h5>
+                                        <textarea class="form-control text-center" name="martialStatus" rows="1" [(ngModel)]="user.martialStatus"></textarea>
+                                    
+                                        <h5>Wykształcenie</h5>
+                                        <textarea class="form-control text-center" name="education" rows="1" [(ngModel)]="user.education"></textarea>
+                                    
+                                        <h5>Zawód</h5>
+                                        <textarea class="form-control text-center" name="profession" rows="1" [(ngModel)]="user.profession"></textarea>
+                                    
+                                        <h5>Języki</h5>
+                                        <textarea class="form-control text-center" name="langueches" rows="1" [(ngModel)]="user.langueches"></textarea>
+                                    
+                                    </div>
+                                </div>
+                            </tab>
+                            <tab heading="O mnie">
+                                <div class="card-body">
+                            
+                                    <h5>O mnie</h5>
+                                    <textarea class="form-control text-center" name="description" rows="2"
+                                        [(ngModel)]="user.description"></textarea>
+                            
+                                    <h5>Moje motto</h5>
+                                    <textarea class="form-control text-center" name="motto" rows="2" [(ngModel)]="user.motto"></textarea>
+                            
+                                    <h5>Osobowość</h5>
+                                    <textarea class="form-control text-center" name="personality" rows="2"
+                                        [(ngModel)]="user.personality"></textarea>
+                            
+                                    <h5>Szukam</h5>
+                                    <textarea class="form-control text-center" name="lookingfor" rows="2" [(ngModel)]="user.lookingFor"></textarea>
+                            
+                                </div>
+                            </tab>
+                            <tab heading="Zainteresowania">
+                                <div class="card-body">
+                                
+                                    <h5>Zainteresowania</h5>
+                                    <textarea class="form-control text-center" name="interest" rows="2" [(ngModel)]="user.interest"></textarea>
+                                
+                                    <h5>Czas wolny</h5>
+                                    <textarea class="form-control text-center" name="freeTime" rows="2" [(ngModel)]="user.freeTime"></textarea>
+                                
+                                    <h5>Sport</h5>
+                                    <textarea class="form-control text-center" name="sport" rows="2" [(ngModel)]="user.sport"></textarea>
+                                
+                                    <h5>Muzyka</h5>
+                                    <textarea class="form-control text-center" name="music" rows="2" [(ngModel)]="user.music"></textarea>
+                                
+                                </div>
+                            </tab>
+                            <tab heading="Preferencję">
+                                <div class="card-body">
+                            
+                                    <h5>Lubię</h5>
+                                    <textarea class="form-control text-center" name="iLike" rows="2" [(ngModel)]="user.iLike"></textarea>
+                            
+                                    <h5>Nie lubię</h5>
+                                    <textarea class="form-control text-center" name="iNotLike" rows="2" [(ngModel)]="user.iNotLike"></textarea>
+                            
+                                    <h5>Śmieszy mnie</h5>
+                                    <textarea class="form-control text-center" name="makesmeLaugh" rows="2"
+                                        [(ngModel)]="user.makesMeLaugh"></textarea>
+                            
+                                    <h5>Czuję się dobrze kiedy</h5>
+                                    <textarea class="form-control text-center" name="itFeelsBestIn" rows="2"
+                                        [(ngModel)]="user.itFeelsBestIn"></textarea>
+                            
+                                    <h5>Znajomi opisują mnie jako</h5>
+                                    <textarea class="form-control text-center" name="friendsWouldDescribeMe" rows="2"
+                                        [(ngModel)]="user.friendsWouldDescribeMe"></textarea>
+                            
+                                </div>
+                            </tab>
+                            <tab heading="Zdjęcia">
+                               
+                            </tab>
+                        </tabset>
+                    </div>
+                    <div class="card-footer">
+                        <div class="text-center">
+                            <button [disabled]="!editForm.dirty" class="btn btn-success btn-block">Zapisz zmiany</button>
+                        </div>
+                    </div>    
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

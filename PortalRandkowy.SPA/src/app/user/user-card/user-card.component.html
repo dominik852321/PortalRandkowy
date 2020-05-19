@@ -1,0 +1,23 @@
+<div class="card m-3 shadow-lg ">
+    <div class="card-body p-1">
+        <h5 class="card-title text-center">{{user.userName | titlecase}} {{user.age}}</h5>
+    </div>
+    <div class="card-img-wrapper">
+        <img class="card-img-top border" src="{{user.photoUrl}}" alt="{{user.userName}}">
+        <ul class="list-inline text-center user-icons animate">
+            <li class="list-inline-item">
+                <button class="btn btn-danger"><i class="fa fa-heart"></i></button>
+            </li>
+            <li class="list-inline-item">
+                <button class="btn btn-success"><i class="fa fa-envelope "></i></button>
+            </li>
+            <li class="list-inline-item">
+                <button class="btn btn-primary" [routerLink]="['/użytkownicy/', user.userid]" routerLinkActive="router-link-active" ><i class="fa fa-user"></i></button>
+            </li>
+        </ul>
+    </div>
+
+    <div class="card-body m-0  row d-flex justify-content-between">
+        <p class="card-text my-auto">{{user.city}}</p>
+    </div>
+</div>

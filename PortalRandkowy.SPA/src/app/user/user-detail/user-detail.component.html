@@ -1,0 +1,203 @@
+<div class="container mt-3">
+    <div class="row display-4">
+        Profil {{user.userName}}
+    </div>
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="card">
+                <div>
+                    <img class="card-img" src="{{user?.photoUrl}}">
+                </div>
+                <div class="card-body">
+                    <strong>Wiek</strong>
+                    <p>{{user.age}} </p>
+                    <strong>Płeć</strong>
+                    <p>{{user.gender}}</p>
+                    <strong>Miejscowość</strong>
+                    <p>{{user.city}} {{user.country}}</p>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-sm-8">
+            <div class="card">
+                <div class="tab-panel">
+                    <tabset>
+                        <tab heading="Informacje {{user?.userName | titlecase}}">
+                            <div class="card-body row">
+                                <div class="col-sm-6">
+                                    <table class="text-center">
+                                        <tr>
+                                            <td>
+                                                <h5 class="strong">Wzrost</h5>
+                                                <p>{{user.growth}}cm</p>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <h5>Kolor oczu</h5>
+                                                <p>{{user.colorEye}}</p>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <h5>Znak zodiaku</h5>
+                                                <p>{{user.zodiacSign}}</p>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <h5>Kolor skóry</h5>
+                                                <p>{{user.colorSkin}}</p>
+                                            </td>
+                                        </tr>
+                            
+                                    </table>
+                                </div>
+                                <div class="col-sm-6">
+                                    <table class="text-center">
+                                        <tr>
+                                            <td>
+                                                <h5>Status</h5>
+                                                <p>{{user.martialStatus}}</p>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <h5>Wykształcenie</h5>
+                                                <p>{{user.martialStatus}}</p>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <h5>Zawód</h5>
+                                                <p>{{user.profession}}</p>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <h5>Języki</h5>
+                                                <p>{{user.langueches}}</p>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                            </tab>
+                        <tab heading="O mnie">
+                            <div class="card-body">
+                            <table>
+                                <tr>
+                                    <td>
+                                        <h5>O mnie</h5>
+                                        <p>{{user.description}}</p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <h5>Moje motto</h5>
+                                        <p>{{user.motto}}</p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <h5>Osobowość</h5>
+                                        <p>{{user.personality}}</p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <h5>Szukam</h5>
+                                        <p>{{user.lookingFor}}</p>
+                                    </td>
+                                </tr>
+
+                            </table>
+                            </div>
+                        </tab>
+                        <tab heading="Zainteresowania">
+                            <div class="card-body">
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <h5>Zainteresowania</h5>
+                                            <p>{{user.interest}}</p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <h5>Czas wolny</h5>
+                                            <p>{{user.freeTime}}</p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <h5>Sport</h5>
+                                            <p>{{user.movies}}</p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <h5>Muzyka</h5>
+                                            <p>{{user.music}}</p>
+                                        </td>
+                                    </tr>
+    
+                                </table>
+                                </div>
+        
+                        </tab>
+                        <tab heading="Preferencję">
+                            <div class="card-body">
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <h5>Lubię</h5>
+                                            <p>{{user.iLike}}</p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <h5>Nie lubię</h5>
+                                            <p>{{user.iNotLike}}</p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <h5>Śmieszy mnie</h5>
+                                            <p>{{user.makesMeLaugh}}</p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <h5>Czuję się dobrze kiedy</h5>
+                                            <p>{{user.itFeelsBestIn}}</p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <h5>Znajomi opisują mnie jako</h5>
+                                            <p>{{user.friendsWouldDescribeMe}}</p>
+                                        </td>
+                                    </tr>
+                                </table>
+                                </div>
+
+                        </tab>
+                        <tab heading="Zdjęcia">
+                            <ngx-gallery [options]="galleryOptions" [images]="galleryImages"></ngx-gallery>
+                        </tab>
+                    </tabset>
+                </div>
+                <div class="card-footer">
+                    <div class="btn-group d-flex">
+                        <button class="btn btn-outline-success">Lubię</button>
+                        <button class="btn btn-outline-primary">Wiadomość</button>
+                        <button class="btn btn-outline-info">Zadzwoń</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+        </div>

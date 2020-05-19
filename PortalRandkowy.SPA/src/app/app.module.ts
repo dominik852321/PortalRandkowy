@@ -4,11 +4,15 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from "@angular/forms";
 import { JwtModule } from '@auth0/angular-jwt';
 import { RouterModule } from '@angular/router';
+import { TabsModule } from 'ngx-bootstrap/tabs';
+import { NgxGalleryModule } from 'ngx-gallery-9';
+
+
 
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { from, config } from 'rxjs';
+import { from, config, fromEventPattern } from 'rxjs';
 import { NavComponent } from './nav/nav.component';
 import { AuthService } from './_services/auth.service';
 import { AlertifyService} from './_services/alertify.service';
@@ -21,6 +25,15 @@ import { MessagesComponent } from './messages/messages.component';
 
 import { appRoutes } from './routes';
 import { AuthGuard } from './_guards/auth.guard';
+import { ErrorInterceptorProvider } from './_services/error.interceptor';
+import { UserCardComponent } from './user/user-card/user-card.component';
+import { UserDetailComponent } from './user/user-detail/user-detail.component';
+import { UserDetailResolver } from './_resolvers/user-detail.resolver';
+import { UserListResolver } from './_resolvers/user-list.resolver';
+import { UserEditComponent } from './user/user-edit/user-edit.component';
+import { UserEditResolver } from './_resolvers/user-edit.resolver';
+import { PreventUnsavedChanges } from './_guards/prevent-unsaved-changes.guard';
+
 
 
 export function tokenGetter() {
@@ -38,7 +51,11 @@ export function tokenGetter() {
     RegisterComponent,
     UserListComponent,
     LikesComponent,
-    MessagesComponent
+    MessagesComponent,
+    UserCardComponent,
+    UserDetailComponent,
+    UserEditComponent,
+    
 
   ],
   imports: [
@@ -53,13 +70,22 @@ export function tokenGetter() {
          blacklistedRoutes: ['localhost:5000/api/auth']
       }
    }),
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes),
+    TabsModule.forRoot(),
+    NgxGalleryModule
   ],
+
+
   providers: [
     AuthService,
     AlertifyService,
     UserService,
-    AuthGuard
+    AuthGuard,
+    ErrorInterceptorProvider,
+    UserDetailResolver,
+    UserListResolver,
+    UserEditResolver,
+    PreventUnsavedChanges
   ],
   bootstrap: [AppComponent]
 })
