@@ -55,7 +55,7 @@ namespace PortalRandkowy.API.Controllers
 
             if(await _userRepository.SaveAll())
                 return NoContent();
-            else
+            
                 throw new Exception($"Aktualizacja użytkownika o id: {id} nie powiodła sie podczas zapisu w bazie"); 
         }
 

@@ -11,6 +11,8 @@ namespace PortalRandkowy.API.Interfaces
          Task<IEnumerable<User>> GetAll();
          Task<User> GetUser(int id);
 
+         Task<Photo> GetPhoto(int id);
+
         
          void DeleteUser(int id);
          

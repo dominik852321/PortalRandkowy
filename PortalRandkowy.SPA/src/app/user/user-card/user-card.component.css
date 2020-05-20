@@ -1,5 +1,6 @@
 .card {
     width: 15rem;
+    border-radius: 5%;
 }
 
 .card:hover {
@@ -45,5 +46,5 @@
 }
 
 .card-img-top{
-    border-radius: 20%;
+    border-radius: 5%;
 }

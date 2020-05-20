@@ -25,7 +25,13 @@ namespace PortalRandkowy.API.Repository
         public async Task<User> GetUser(int id)
             =>await _dataContext.Users.Include(s=>s.Photos).FirstOrDefaultAsync(s=>s.Userid==id);
        
-        
+        public async Task<Photo> GetPhoto(int id)
+        {
+            var photo = await _dataContext.Photos.FirstOrDefaultAsync(s=>s.id==id);
+            return photo;
+        } 
+       
+       
         public void DeleteUser(int id)
         {
                var user = _dataContext.Users.FirstOrDefault(s=>s.Userid==id);
@@ -34,7 +40,8 @@ namespace PortalRandkowy.API.Repository
         }
 
         
-     
+            
+        
     }
 
 }

@@ -10,6 +10,8 @@ namespace PortalRandkowy.API.Model
         public DateTime DateAdded {get; set;}    
         public Boolean MainPhoto {get; set;}     // Czy to główne zdjęcie?
 
+        public string public_id {get; set;}
+
         public User user {get; set;}             //Właściciel zdjęcia
         public int UserId {get; set;}            
     } 

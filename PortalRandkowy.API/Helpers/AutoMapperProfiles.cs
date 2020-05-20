@@ -28,6 +28,10 @@ namespace PortalRandkowy.API.Helpers
             CreateMap<Photo, PhotosForDetailedDTO>();
 
             CreateMap<UserForEditDTO, User>();
+
+            CreateMap<PhotoForCreationDTO, Photo>();
+            
+            CreateMap<Photo, PhotoForReturnDTO>();
         }
     }
 }
