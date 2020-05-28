@@ -16,9 +16,12 @@
         </ul>
 
         <div *ngIf="loggedIn()" class="dropdown mr-4">
+            <span>
+                <img src="{{photoUrl}}" class="img-fluid rounded-circle">
+            </span>
             <button class="btn  dropdown-toggle text-dark" type="button" id="dropDownUser"
                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="h4">{{ authService.decodedToken?.unique_name | titlecase }}</span>
+                <span class="h4">  {{ authService.decodedToken?.unique_name | titlecase }}</span>
             </button>
             <div class="dropdown-menu" aria-labelledby="dropDownUser">
                 <a class="dropdown-item" [routerLink]="['/profil']"><i class="fa fa-user h4"></i> Edytuj profil</a>

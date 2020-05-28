@@ -14,7 +14,7 @@
         <div class="col-sm-4">
             <div class="card">
                 <div>
-                    <img class="card-img" src="{{user?.photoUrl}}">
+                    <img class="card-img" src="{{photoUrl}}">
                 </div>
                 <div class="card-body">
                     <strong>Wiek</strong>
@@ -71,8 +71,7 @@
                                 <div class="card-body">
                             
                                     <h5>O mnie</h5>
-                                    <textarea class="form-control text-center" name="description" rows="2"
-                                        [(ngModel)]="user.description"></textarea>
+                                    <textarea class="form-control text-center" name="description" rows="2" [(ngModel)]="user.description"></textarea>
                             
                                     <h5>Moje motto</h5>
                                     <textarea class="form-control text-center" name="motto" rows="2" [(ngModel)]="user.motto"></textarea>
@@ -82,7 +81,7 @@
                                         [(ngModel)]="user.personality"></textarea>
                             
                                     <h5>Szukam</h5>
-                                    <textarea class="form-control text-center" name="lookingfor" rows="2" [(ngModel)]="user.lookingFor"></textarea>
+                                    <textarea class="form-control text-center" name="lookingFor" rows="2" [(ngModel)]="user.lookingFor"></textarea>
                             
                                 </div>
                             </tab>
@@ -113,7 +112,7 @@
                                     <textarea class="form-control text-center" name="iNotLike" rows="2" [(ngModel)]="user.iNotLike"></textarea>
                             
                                     <h5>Śmieszy mnie</h5>
-                                    <textarea class="form-control text-center" name="makesmeLaugh" rows="2"
+                                    <textarea class="form-control text-center" name="makesMeLaugh" rows="2"
                                         [(ngModel)]="user.makesMeLaugh"></textarea>
                             
                                     <h5>Czuję się dobrze kiedy</h5>
@@ -127,7 +126,7 @@
                                 </div>
                             </tab>
                             <tab heading="Zdjęcia">
-                               
+                               <app-user-photos [photos]="user.photos" (getUserPhotoChange)="updateMainPhoto($event)"></app-user-photos>
                             </tab>
                         </tabset>
                     </div>

@@ -18,18 +18,24 @@ namespace PortalRandkowy.API.Repository
             _dataContext = dataContext;
         }
 
-        
+    
         public async Task<IEnumerable<User>> GetAll()
             =>await _dataContext.Users.Include(s=>s.Photos).ToListAsync();
 
+        public async Task<IEnumerable<Photo>> GetPhotos(int userId)
+            => await _dataContext.Photos.Where(s=>s.UserId == userId).ToListAsync();
+
         public async Task<User> GetUser(int id)
-            =>await _dataContext.Users.Include(s=>s.Photos).FirstOrDefaultAsync(s=>s.Userid==id);
+            => await _dataContext.Users.Include(s=>s.Photos).FirstOrDefaultAsync(s=>s.Userid==id);
        
         public async Task<Photo> GetPhoto(int id)
         {
             var photo = await _dataContext.Photos.FirstOrDefaultAsync(s=>s.id==id);
             return photo;
         } 
+        public async Task<Photo> GetMainPhotoForUser(int userId)
+            =>await _dataContext.Photos.Where(s=>s.UserId == userId).FirstOrDefaultAsync(s=>s.MainPhoto == true);
+
        
        
         public void DeleteUser(int id)
@@ -39,9 +45,7 @@ namespace PortalRandkowy.API.Repository
                _dataContext.SaveChanges();
         }
 
-        
-            
-        
+       
     }
 
 }

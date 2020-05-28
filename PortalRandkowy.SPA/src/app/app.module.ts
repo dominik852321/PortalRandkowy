@@ -1,11 +1,14 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { JwtModule } from '@auth0/angular-jwt';
 import { RouterModule } from '@angular/router';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { NgxGalleryModule } from 'ngx-gallery-9';
+import { FileUploadModule } from 'ng2-file-upload';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 
@@ -33,6 +36,7 @@ import { UserListResolver } from './_resolvers/user-list.resolver';
 import { UserEditComponent } from './user/user-edit/user-edit.component';
 import { UserEditResolver } from './_resolvers/user-edit.resolver';
 import { PreventUnsavedChanges } from './_guards/prevent-unsaved-changes.guard';
+import { UserPhotosComponent } from './user/user-photos/user-photos.component';
 
 
 
@@ -55,6 +59,8 @@ export function tokenGetter() {
     UserCardComponent,
     UserDetailComponent,
     UserEditComponent,
+    UserPhotosComponent,
+   
     
 
   ],
@@ -63,6 +69,7 @@ export function tokenGetter() {
     HttpClientModule,
     AppRoutingModule,
     FormsModule,
+    ReactiveFormsModule,
     JwtModule.forRoot({
       config: {
          tokenGetter: tokenGetter,
@@ -72,7 +79,11 @@ export function tokenGetter() {
    }),
     RouterModule.forRoot(appRoutes),
     TabsModule.forRoot(),
-    NgxGalleryModule
+    NgxGalleryModule,
+    FileUploadModule,
+    BsDatepickerModule.forRoot(),
+    BrowserAnimationsModule
+
   ],
 
 

@@ -10,6 +10,6 @@ namespace PortalRandkowy.API.Dtos
         public DateTime DateAdded {get; set;}    
         public Boolean MainPhoto {get; set;}     
 
-        public string PublicId {get; set;}
+        public string public_id {get; set;}
     }
 }

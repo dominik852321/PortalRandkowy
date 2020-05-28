@@ -20,7 +20,7 @@ namespace PortalRandkowy.API.Repository
 
         public async Task<User> Login(string username, string password)
         {
-            var user = await _dataContext.Users.FirstOrDefaultAsync(s=>s.UserName == username);
+            var user = await _dataContext.Users.Include(p =>p.Photos).FirstOrDefaultAsync(s=>s.UserName == username);
 
             if(user == null)
                   return null;
