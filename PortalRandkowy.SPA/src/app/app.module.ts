@@ -5,9 +5,11 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { JwtModule } from '@auth0/angular-jwt';
 import { RouterModule } from '@angular/router';
 import { TabsModule } from 'ngx-bootstrap/tabs';
+import { PaginationModule } from 'ngx-bootstrap/pagination'
 import { NgxGalleryModule } from 'ngx-gallery-9';
 import { FileUploadModule } from 'ng2-file-upload';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { ButtonsModule } from 'ngx-bootstrap/buttons';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
@@ -37,6 +39,10 @@ import { UserEditComponent } from './user/user-edit/user-edit.component';
 import { UserEditResolver } from './_resolvers/user-edit.resolver';
 import { PreventUnsavedChanges } from './_guards/prevent-unsaved-changes.guard';
 import { UserPhotosComponent } from './user/user-photos/user-photos.component';
+import { TimeAgoPipe } from './_pipes/time-ago-pipe';
+import { LikesResolver } from './_resolvers/likes.resolver';
+import { MessagesResolver } from './_resolvers/messages.resolver';
+import { UserMessagesComponent } from './user/user-messages/user-messages.component';
 
 
 
@@ -60,8 +66,8 @@ export function tokenGetter() {
     UserDetailComponent,
     UserEditComponent,
     UserPhotosComponent,
-   
-    
+    TimeAgoPipe,
+    UserMessagesComponent,
 
   ],
   imports: [
@@ -82,7 +88,9 @@ export function tokenGetter() {
     NgxGalleryModule,
     FileUploadModule,
     BsDatepickerModule.forRoot(),
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    PaginationModule.forRoot(),
+    ButtonsModule.forRoot()
 
   ],
 
@@ -96,6 +104,8 @@ export function tokenGetter() {
     UserDetailResolver,
     UserListResolver,
     UserEditResolver,
+    LikesResolver,
+    MessagesResolver,
     PreventUnsavedChanges
   ],
   bootstrap: [AppComponent]

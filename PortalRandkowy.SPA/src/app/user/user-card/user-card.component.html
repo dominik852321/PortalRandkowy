@@ -3,9 +3,9 @@
         <h5 class="card-title text-center">{{user.userName | titlecase}} {{user.age}}</h5>
     </div>
     <div class="card-img-wrapper">
-        <img class="card-img-top border" src="{{user.photoUrl}}" alt="{{user.userName}}">
+        <img class="card-img-top border" src="{{user.photoUrl || '../../../../../assets/user.png'}}" alt="{{user.userName}}">
         <ul class="list-inline text-center user-icons animate">
-            <li class="list-inline-item">
+            <li class="list-inline-item" (click)="sendLike(user.userid)">
                 <button class="btn btn-danger"><i class="fa fa-heart"></i></button>
             </li>
             <li class="list-inline-item">

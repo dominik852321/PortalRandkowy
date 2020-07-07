@@ -19,6 +19,61 @@ namespace PortalRandkowy.API.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("PortalRandkowy.API.Model.Like", b =>
+                {
+                    b.Property<int>("UserLikesId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserIsLikedId")
+                        .HasColumnType("int");
+
+                    b.HasKey("UserLikesId", "UserIsLikedId");
+
+                    b.HasIndex("UserIsLikedId");
+
+                    b.ToTable("Likes");
+                });
+
+            modelBuilder.Entity("PortalRandkowy.API.Model.Message", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Content")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("DateRead")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DateSend")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsRead")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("RecipienDelete")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("RecipientId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("SenderDelete")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("SenderId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RecipientId");
+
+                    b.HasIndex("SenderId");
+
+                    b.ToTable("Messages");
+                });
+
             modelBuilder.Entity("PortalRandkowy.API.Model.Photo", b =>
                 {
                     b.Property<int>("id")
@@ -175,6 +230,36 @@ namespace PortalRandkowy.API.Migrations
                     b.HasKey("id");
 
                     b.ToTable("Values");
+                });
+
+            modelBuilder.Entity("PortalRandkowy.API.Model.Like", b =>
+                {
+                    b.HasOne("PortalRandkowy.API.Model.User", "UserIsLiked")
+                        .WithMany("UserLikes")
+                        .HasForeignKey("UserIsLikedId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("PortalRandkowy.API.Model.User", "UserLikes")
+                        .WithMany("UserIsLiked")
+                        .HasForeignKey("UserLikesId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("PortalRandkowy.API.Model.Message", b =>
+                {
+                    b.HasOne("PortalRandkowy.API.Model.User", "Recipient")
+                        .WithMany("MessagesRecived")
+                        .HasForeignKey("RecipientId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("PortalRandkowy.API.Model.User", "Sender")
+                        .WithMany("MessagesSend")
+                        .HasForeignKey("SenderId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("PortalRandkowy.API.Model.Photo", b =>

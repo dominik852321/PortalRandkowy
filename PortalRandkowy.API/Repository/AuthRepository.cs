@@ -22,13 +22,15 @@ namespace PortalRandkowy.API.Repository
         {
             var user = await _dataContext.Users.Include(p =>p.Photos).FirstOrDefaultAsync(s=>s.UserName == username);
 
-            if(user == null)
-                  return null;
+            if (user != null)
+            {
+                if (!VerifyPasswordHash(password, user.PasswordHash, user.PasswordSalt))
+                    return null;
+ 
+                return user;
+            }
 
-           if(!VerifyPasswordHash(password, user.PasswordHash, user.PasswordSalt))
-            return null;  
-
-            return user;
+            return null;
         }
 
         
@@ -80,6 +82,8 @@ namespace PortalRandkowy.API.Repository
                 return true;
             }
         }
+
+      
 
         #endregion
     }

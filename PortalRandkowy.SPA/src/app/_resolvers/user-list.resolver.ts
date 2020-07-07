@@ -10,22 +10,22 @@ import { catchError } from 'rxjs/operators';
 @Injectable()
 export class UserListResolver implements Resolve<User[]> {
     
+    pageNumber = 1;
+    pageSize = 16;
+
     constructor(private userService: UserService, 
                  private router: Router, 
                  private alertify: AlertifyService) {}
                 
     resolve(route: ActivatedRouteSnapshot): Observable<User[]>  {
-        return this.userService.GetUsers().pipe(
+        return this.userService.GetUsers(this.pageNumber, this.pageSize).pipe(
             catchError(error =>{
               this.alertify.error('Problem z pobraniem danych');
               this.router.navigate(['']);
               return of(null);
             })
         );
-    }
-
-     
-                 
+    }      
 
     }
     

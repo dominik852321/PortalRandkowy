@@ -6,11 +6,13 @@ using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PortalRandkowy.API.Dtos;
+using PortalRandkowy.API.Helpers;
 using PortalRandkowy.API.Interfaces;
 using PortalRandkowy.API.Model;
 
 namespace PortalRandkowy.API.Controllers
 {
+    [ServiceFilter(typeof(LogUserActivity))]
     [Authorize]
     [Route("api/[controller]")]
     [ApiController]
@@ -26,17 +28,30 @@ namespace PortalRandkowy.API.Controllers
             _mapper = mapper;
         }
 
+  
 
-        public async Task<IActionResult> GetAll()
+        public async Task<IActionResult> GetAll([FromQuery]UserParams userParams)
         {
-          
-            var users = await _userRepository.GetAll();
+            var currentUserId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+            var userFromRepo = await _userRepository.GetUser(currentUserId);
+
+            userParams.UserId = currentUserId;
+
+            if(string.IsNullOrEmpty(userParams.Gender))
+            {
+                userParams.Gender = userFromRepo.Gender == "Mężczyzna" ? "Kobieta" : "Mężczyzna";
+            }
+
+            var users = await _userRepository.GetAll(userParams);
             var usersToReturn = _mapper.Map<IEnumerable<UserForListDTO>>(users);
+
+            Response.AddPagination(users.CurrentPage, users.PageSize, users.TotalCount, users.TotalPages);
+
             return Ok(usersToReturn);
         }
 
       
-        [HttpGet("{id}")]
+        [HttpGet("{id}", Name = "GetUser")]
         public async Task<IActionResult> GetUser(int id)
         {
           var user = await _userRepository.GetUser(id);
@@ -59,20 +74,45 @@ namespace PortalRandkowy.API.Controllers
                 throw new Exception($"Aktualizacja użytkownika o id: {id} nie powiodła sie podczas zapisu w bazie"); 
         }
 
-
-
-        [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
+        [HttpPost("{id}/like/{recipientId}")]
+        public async Task<IActionResult> LikeUser(int id, int recipientId)
         {
-            var user = _userRepository.GetUser(id);
-            if(user.Result!=null)
-               {
-                    _userRepository.DeleteUser(id);
-                   return Ok("Użytkownik został usunięty");
-               }
-            return NotFound("Użytkownik nie istnieje");   
+            if(id != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+               return Unauthorized();
+
+            var like = await _userRepository.GetLike(id, recipientId);
+
+            if(like != null)
+               return BadRequest("Już lubisz tego użytkownika");
+
+            if(await _userRepository.GetUser(recipientId) == null)
+               return NotFound();
+
+            like = new Like
+            {
+                UserLikesId = id,
+                UserIsLikedId = recipientId
+            };
+
+            _userRepository.Add<Like>(like);
+            
+            if(await _userRepository.SaveAll())
+               return Ok();
+
+
+            return BadRequest("Nie można polubić użytkownika");   
         }
 
+        
+
+       
+
+
+
+
+
+
+     
          
 
         

@@ -30,15 +30,14 @@ namespace PortalRandkowy.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<DataContext>(x => x.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+               services.AddDbContext<DataContext>(x => x.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddCors();
             services.Configure<CloudinarySettings>(Configuration.GetSection("CloudinarySettings"));
             services.AddAutoMapper(typeof(Startup));
             services.AddScoped<IAuthRepository, AuthRepository>();
             services.AddScoped<IUserRepository, UserRespository>();
-
-            services.AddTransient<Seed>();
             
+            services.AddTransient<Seed>();
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                     .AddJwtBearer(Options =>{
@@ -51,6 +50,7 @@ namespace PortalRandkowy.API
                             ValidateAudience = false
                         };
                     });
+            services.AddScoped<LogUserActivity>();
             
            
             services.AddControllers().AddNewtonsoftJson();
@@ -89,6 +89,7 @@ namespace PortalRandkowy.API
             
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapDefaultControllerRoute();
                 endpoints.MapControllers();
             });
         }

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using PortalRandkowy.API.Model;
 
 namespace PortalRandkowy.API.Dtos
 {
@@ -54,6 +55,8 @@ namespace PortalRandkowy.API.Dtos
         public ICollection<PhotosForDetailedDTO> Photos {get; set;}
 
         public string PhotoUrl {get; set;}
+
+        
 
     }
 }

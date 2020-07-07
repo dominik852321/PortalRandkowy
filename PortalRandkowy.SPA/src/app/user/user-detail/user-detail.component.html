@@ -6,7 +6,7 @@
         <div class="col-sm-4">
             <div class="card">
                 <div>
-                    <img class="card-img" src="{{user?.photoUrl}}">
+                    <img class="card-img" src="{{user.photoUrl || '../../../../../assets/user.png'}}">
                 </div>
                 <div class="card-body">
                     <strong>Wiek</strong>
@@ -15,6 +15,8 @@
                     <p>{{user.gender}}</p>
                     <strong>Miejscowość</strong>
                     <p>{{user.city}} {{user.country}}</p>
+                    <strong>Ostatnia aktywność:</strong>
+                    <p>{{user.lastActive | timeAgo }}</p>
                 </div>
             </div>
         </div>
@@ -24,7 +26,7 @@
             <div class="card">
                 <div class="tab-panel">
                     <tabset>
-                        <tab heading="Informacje {{user?.userName | titlecase}}">
+                        <tab heading="Informacje {{user.userName | titlecase}}">
                             <div class="card-body row">
                                 <div class="col-sm-6">
                                     <table class="text-center">
@@ -187,6 +189,9 @@
                         </tab>
                         <tab heading="Zdjęcia" class="text-center">
                             <ngx-gallery [options]="galleryOptions" [images]="galleryImages"></ngx-gallery>
+                        </tab>
+                        <tab heading="Wiadomość" class="text-center">
+                            <app-user-messages [recipientId]="user.userid"></app-user-messages>
                         </tab>
                     </tabset>
                 </div>

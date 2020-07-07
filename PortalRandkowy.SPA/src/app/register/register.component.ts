@@ -3,6 +3,8 @@ import { AuthService } from '../_services/auth.service';
 import { AlertifyService } from '../_services/alertify.service';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker/public_api';
+import { User } from '../_models/user';
+import { Router } from '@angular/router';
 
 
 declare let alertify: any;
@@ -16,11 +18,12 @@ export class RegisterComponent implements OnInit {
 
  
   @Output() cancelRegister: EventEmitter<boolean> = new EventEmitter();
+   user: User;
    model: any = {};
    registerForm: FormGroup;
    DatepickerConfig: Partial<BsDatepickerConfig>;
 
-  constructor(private authService: AuthService, private alertifyService: AlertifyService, private fb: FormBuilder) { }
+  constructor(private authService: AuthService, private alertifyService: AlertifyService, private fb: FormBuilder, private router: Router) { }
 
   ngOnInit(): void {
     this.DatepickerConfig = {
@@ -48,11 +51,20 @@ export class RegisterComponent implements OnInit {
     return fg.get('password').value === fg.get('confirmPassword').value ? null : {missmatch: true};
   }
   register(){
-    // this.authService.register(this.model).subscribe(s=> {
-    //   this.alertifyService.success("Rejestracja udana!");
-    // }, error => {
-    //   alertify.error(error);
-    // });
+    if (this.registerForm.valid) {
+      this.user = Object.assign({}, this.registerForm.value);
+
+      this.authService.register(this.user).subscribe(s => {
+        this.alertifyService.success("Rejestracja udana!");
+      }, error => {alertify.error(error);
+      }, () => {
+        this.authService.login(this.user).subscribe( () => {
+          this.router.navigate(['/użytkownicy']);
+        })
+      });
+    }
+
+   
     console.log(this.registerForm.value);
   }
 

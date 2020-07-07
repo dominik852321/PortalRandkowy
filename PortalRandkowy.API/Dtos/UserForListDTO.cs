@@ -24,6 +24,9 @@ namespace PortalRandkowy.API.Dtos
         public string ColorSkin {get; set;}      
         public string Education {get; set;}      
         public string Profession {get; set;}   
+
+        public DateTime LastActive { get; set; }
+        public DateTime Created { get; set; }
     
         public string PhotoUrl {get; set;} 
     }

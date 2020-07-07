@@ -14,7 +14,7 @@
         <div class="col-sm-4">
             <div class="card">
                 <div>
-                    <img class="card-img" src="{{photoUrl}}">
+                    <img class="card-img" src="{{photoUrl || '../../../../../assets/user.png'}}">
                 </div>
                 <div class="card-body">
                     <strong>Wiek</strong>
@@ -23,6 +23,8 @@
                     <p>{{user.gender}}</p>
                     <strong>Miejscowość</strong>
                     <p>{{user.city}} {{user.country}}</p>
+                    <strong>Ostatnia aktywność:</strong>
+                    <p>{{user.lastActive | timeAgo }}</p>
                 </div>
             </div>
         </div>

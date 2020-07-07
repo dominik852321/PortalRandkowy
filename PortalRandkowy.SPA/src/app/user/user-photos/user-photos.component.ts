@@ -28,6 +28,7 @@ export class UserPhotosComponent implements OnInit {
 
   ngOnInit(): void {
     this.initializeUploader();
+
   }
 
   public fileOverBase(e: any): void {
@@ -58,16 +59,23 @@ export class UserPhotosComponent implements OnInit {
           mainPhoto: res.mainPhoto
         };
         this.photos.push(photo);
+        if(photo.mainPhoto){
+          this.authService.changeUserPhoto(photo.url);
+          this.authService.currentUser.photoUrl = photo.url;
+          localStorage.setItem('user', JSON.stringify(this.authService.currentUser));
+         }
       }
     };
 
   }
 
+
   setMainPhoto(photo: Photo) {
     this.userService.SetMainPhoto(this.authService.decodedToken.nameid, photo.id).subscribe(() => {
       console.log('Sukces, zdjęcie ustawione jako główne');
-      this.currentMain = this.photos.filter(p => p.mainPhoto === true)[0];
-      this.currentMain.mainPhoto = false;
+      if (this.currentMain = this.photos.filter(p => p.mainPhoto === true)[0]) {
+        this.currentMain.mainPhoto = false;
+      }
       photo.mainPhoto = true;
       this.authService.changeUserPhoto(photo.url);
       this.authService.currentUser.photoUrl = photo.url;

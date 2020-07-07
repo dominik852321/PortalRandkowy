@@ -40,10 +40,12 @@ namespace PortalRandkowy.API.Controllers
             if(await _repositoryAuth.UserExists(userForRegister.Username))
                  return BadRequest("Użytkownik o takiej nazwie już istnieje");
             
-            var user = new User{ UserName = userForRegister.Username};
+            var user = _mapper.Map<User>(userForRegister);
            
             var createdUser = await _repositoryAuth.Register(user, userForRegister.Password);
-            return Ok(user);
+
+            var userToReturn = _mapper.Map<UserForDetailedDTO>(createdUser);
+            return CreatedAtRoute("GetUser", new { controller = "Users", Id = createdUser.Userid}, userToReturn);
         }
 
         [HttpPost("login")]
@@ -55,6 +57,7 @@ namespace PortalRandkowy.API.Controllers
             if(userFromRepo == null)
                  return Unauthorized();     
 
+            
             var claims = new[]
             {
                 new Claim(ClaimTypes.NameIdentifier, userFromRepo.Userid.ToString()),

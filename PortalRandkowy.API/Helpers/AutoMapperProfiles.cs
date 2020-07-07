@@ -26,12 +26,18 @@ namespace PortalRandkowy.API.Helpers
             });
 
             CreateMap<Photo, PhotosForDetailedDTO>();
-
             CreateMap<UserForEditDTO, User>();
-
             CreateMap<PhotoForCreationDTO, Photo>();
-            
             CreateMap<Photo, PhotoForReturnDTO>();
+            CreateMap<UserForRegisterDTO, User>();
+            CreateMap<MessageForCreationDTO, Message>().ReverseMap();
+            CreateMap<Message, MessageToReturnDTO>()
+                .ForMember(m => m.SenderPhotoUrl, opt => opt
+                    .MapFrom(u => u.Sender.Photos.FirstOrDefault(p => p.MainPhoto).Url))
+                .ForMember(m => m.RecipientPhotoUrl, opt => opt
+                    .MapFrom(u => u.Recipient.Photos.FirstOrDefault(p => p.MainPhoto).Url));
+           
+              
         }
     }
 }

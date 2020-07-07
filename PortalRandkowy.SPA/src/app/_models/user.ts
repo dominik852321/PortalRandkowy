@@ -7,8 +7,8 @@ export interface User {
     gender: string;
     age: number;
     zodiacSign: string;
-    created: Date;
-    lastActive: Date;
+    created: string;
+    lastActive: string;
     city: string;
     country: string;
     //Informacje o użytkowniku

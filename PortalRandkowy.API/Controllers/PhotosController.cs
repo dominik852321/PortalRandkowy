@@ -81,9 +81,7 @@ namespace PortalRandkowy.API.Controllers
 
             var photo = _mapper.Map<Photo>(photoForCreation);
 
-            if(!userFromRepo.Photos.Any(p => p.MainPhoto))
-                photo.MainPhoto = true;
-
+           
             userFromRepo.Photos.Add(photo);
 
             if (await _userRepository.SaveAll())
@@ -121,9 +119,14 @@ namespace PortalRandkowy.API.Controllers
             if(photoFromRepo.MainPhoto)
                  return BadRequest("To jest główne zdjęcię");
 
-            var currentMainPhoto =  await _userRepository.GetMainPhotoForUser(userId);
-            currentMainPhoto.MainPhoto=false;
-            photoFromRepo.MainPhoto=true;
+            if (user.Photos.Any(p => p.MainPhoto))
+            {
+                var currentMainPhoto = await _userRepository.GetMainPhotoForUser(userId);
+                currentMainPhoto.MainPhoto = false;
+                photoFromRepo.MainPhoto = true;
+            }
+           
+            photoFromRepo.MainPhoto = true;
             
             if(await _userRepository.SaveAll())
             {
