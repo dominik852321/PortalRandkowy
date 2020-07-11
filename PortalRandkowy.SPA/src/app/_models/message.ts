@@ -6,8 +6,9 @@ export interface Message {
     recipientId: number;
     recipientUsername: string;
     recipientPhotoUrl: string;
-    content: string; 
-    isRead: Boolean;
-    dataRead: Date;
-    dateSend: Date;
+    content: string;
+    isRead: boolean;
+    dateRead: Date;
+    dateSent: Date;
+    messageContainer: string
 }

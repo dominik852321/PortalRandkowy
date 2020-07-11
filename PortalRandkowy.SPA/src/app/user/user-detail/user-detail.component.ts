@@ -1,9 +1,11 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { User } from 'src/app/_models/user';
 import { UserService } from 'src/app/_services/user.service';
 import { AlertifyService } from 'src/app/_services/alertify.service';
 import { ActivatedRoute } from '@angular/router';
 import { NgxGalleryOptions, NgxGalleryImage, NgxGalleryAnimation } from 'ngx-gallery-9';
+import { TabsetComponent } from 'ngx-bootstrap/tabs';
+import { AuthService } from 'src/app/_services/auth.service';
 
 @Component({
   selector: 'app-user-detail',
@@ -12,18 +14,24 @@ import { NgxGalleryOptions, NgxGalleryImage, NgxGalleryAnimation } from 'ngx-gal
 })
 export class UserDetailComponent implements OnInit {
 
-
+  @ViewChild('userTabs', {static: true}) userTabs: TabsetComponent;
   user: User;
   galleryOptions: NgxGalleryOptions[];
   galleryImages: NgxGalleryImage[];
   
   constructor(private userService: UserService, 
+              private authService: AuthService,
               public alertify: AlertifyService, 
               private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.route.data.subscribe(data => {
       this.user = data.user;
+    });
+
+    this.route.queryParams.subscribe(params => {
+      const selectTab = params.tab;
+      this.userTabs.tabs[selectTab> 0 ? selectTab : 0].active = true;
     });
 
     this.galleryOptions = [
@@ -52,5 +60,18 @@ export class UserDetailComponent implements OnInit {
       });
     }
     return imagesUrls; 
+  }
+
+  selectTab(tabId: number) {
+    this.userTabs.tabs[tabId].active = true;
+  }
+
+  sendLike(id: number) {
+    this.userService.SendLike(this.authService.decodedToken.nameid, id)
+          .subscribe(data => {
+            this.alertify.success('Polubiłeś: ' +this.user.userName)
+          }, error => {
+            this.alertify.error(error);
+          })
   }
 }

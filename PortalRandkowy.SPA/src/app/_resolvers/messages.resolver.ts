@@ -4,7 +4,7 @@ import { Resolve, ActivatedRouteSnapshot, Router } from '@angular/router';
 import { UserService } from '../_services/user.service';
 import { AlertifyService } from '../_services/alertify.service';
 import { catchError } from 'rxjs/operators';
-import { Message } from '@angular/compiler/src/i18n/i18n_ast';
+import { Message } from 'src/app/_models/message';
 import { AuthService } from '../_services/auth.service';
 
 

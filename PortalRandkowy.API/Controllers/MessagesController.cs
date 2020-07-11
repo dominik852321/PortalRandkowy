@@ -32,7 +32,8 @@ namespace PortalRandkowy.API.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateMessage(int userId, MessageForCreationDTO messageForCreation)
         {
-             if(userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+             var sender =await _repository.GetUser(userId);
+             if(sender.Userid!= int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
                return Unauthorized();
 
              messageForCreation.SenderId = userId;
@@ -49,7 +50,6 @@ namespace PortalRandkowy.API.Controllers
             {
                 var messageToReturn = _mapper.Map<MessageToReturnDTO>(message);
                  return CreatedAtAction(nameof(GetMessage), new { Id = messageToReturn.Id}, messageToReturn);
-                
             }
 
              throw new Exception("Utworzenie wiadomości nie powiodło się przy zapisie");  
@@ -82,6 +82,12 @@ namespace PortalRandkowy.API.Controllers
             Response.AddPagination(messagesFromRepo.CurrentPage, messagesFromRepo.PageSize, 
                                    messagesFromRepo.TotalCount, messagesFromRepo.TotalPages);
 
+            foreach(var message in messagesToReturn)
+            {
+                message.MessageContainer = messageParams.MessageContainer;
+            }
+            
+
             return Ok(messagesToReturn);           
         }
 
@@ -100,6 +106,50 @@ namespace PortalRandkowy.API.Controllers
 
             return Ok(messageThread);   
         }
+
+        [HttpPost("{id}")]
+        public async Task<IActionResult> DeleteMessage(int userId, int id)
+        {
+            if(userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+               return Unauthorized();
+
+            var messageFromRepo = await _repository.GetMessage(id);
+
+            if(messageFromRepo.SenderId == userId)
+               messageFromRepo.SenderDelete = true;
+
+            if(messageFromRepo.RecipientId == userId)
+               messageFromRepo.RecipienDelete = true;
+
+            if(messageFromRepo.SenderDelete==true && messageFromRepo.RecipienDelete==true)
+               _repository.Delete(messageFromRepo);
+
+            if(await _repository.SaveAll())
+               return NoContent();
+
+            throw new Exception("Błąd podczas usuwania wiadomości");      
+        }
+
+        [HttpPost("{id}/read")]
+        public async Task<IActionResult> MarkMessageAsRead(int userId, int id)
+        {
+           if(userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+               return Unauthorized();
+
+           var message = await _repository.GetMessage(id);
+
+           if(message.RecipientId != userId)
+              return Unauthorized();
+
+           message.IsRead=true;
+           message.DateRead=DateTime.Now;
+
+           if(await _repository.SaveAll())
+               return NoContent();
+
+            throw new Exception("Błąd podczas odczytu wiadomości");      
+        }
+
 
 
        

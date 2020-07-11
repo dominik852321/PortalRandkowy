@@ -86,12 +86,17 @@ namespace PortalRandkowy.API
             app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();
+            app.UseDefaultFiles();
+            app.UseStaticFiles();
             
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapDefaultControllerRoute();
                 endpoints.MapControllers();
+                endpoints.MapFallbackToController("Index", "Fallback");
             });
+
+           
         }
     }
 }

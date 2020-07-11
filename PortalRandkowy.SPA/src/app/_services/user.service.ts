@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { User } from '../_models/user';
 import { PaginationResult } from '../_models/pagination';
 import { map } from 'rxjs/operators';
-import { Message } from '@angular/compiler/src/i18n/i18n_ast';
+import { Message } from 'src/app/_models/message';
 
 @Injectable({
   providedIn: 'root'
@@ -103,6 +103,18 @@ export class UserService {
 
   GetMessageThread(id: number, recipientId: number) {
     return this.http.get<Message[]>(this.baseUrl + "/" + id + "/messages/thread/" + recipientId);
+  }
+
+  SendMessage(id: number, message: Message) {
+    return this.http.post(this.baseUrl + "/" + id + "/messages", message);
+  }
+
+  DeleteMessage(id: number, messageId: number) {
+    return this.http.post(this.baseUrl +"/"+ id +"/messages/"+ messageId, {});
+  }
+
+  MarkAsRead(userId: number, messageId: number) {
+    this.http.post(this.baseUrl + "/" + userId +"/messages/"+ messageId + "/read", {}).subscribe();
   }
   
 }

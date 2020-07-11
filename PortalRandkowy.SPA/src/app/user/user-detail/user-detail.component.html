@@ -25,7 +25,7 @@
         <div class="col-sm-8">
             <div class="card">
                 <div class="tab-panel">
-                    <tabset>
+                    <tabset #userTabs>
                         <tab heading="Informacje {{user.userName | titlecase}}">
                             <div class="card-body row">
                                 <div class="col-sm-6">
@@ -197,8 +197,8 @@
                 </div>
                 <div class="card-footer">
                     <div class="btn-group d-flex">
-                        <button class="btn btn-outline-success">Lubię</button>
-                        <button class="btn btn-outline-primary">Wiadomość</button>
+                        <button class="btn btn-outline-success" (click)="sendLike(user.userid)">Lubię</button>
+                        <button class="btn btn-outline-primary" (click)="selectTab(5)">Wiadomość</button>
                         <button class="btn btn-outline-info">Zadzwoń</button>
                     </div>
                 </div>

@@ -117,13 +117,13 @@ namespace PortalRandkowy.API.Repository
             switch (messageParams.MessageContainer)
             {
                 case "Inbox" : 
-                    messages = messages.Where(z =>z.RecipientId == messageParams.UserId);
+                    messages = messages.Where(z =>z.RecipientId == messageParams.UserId && z.RecipienDelete == false);
                     break;
                 case "Outbox" :
-                    messages = messages.Where(z => z.SenderId == messageParams.UserId);
+                    messages = messages.Where(z => z.SenderId == messageParams.UserId && z.SenderDelete == false);
                     break;    
                 default:
-                    messages = messages.Where(z => z.RecipientId == messageParams.UserId && z.IsRead == false);
+                    messages = messages.Where(z => z.RecipientId == messageParams.UserId && z.IsRead == false && z.RecipienDelete == false);
                     break;    
             }
 

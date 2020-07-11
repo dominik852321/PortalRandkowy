@@ -20,7 +20,9 @@ export class UserListComponent implements OnInit {
   pagination: Pagination;
 
 
-  constructor(private userService: UserService, public alertify: AlertifyService, public route: ActivatedRoute) { }
+  constructor(private userService: UserService, 
+              public alertify: AlertifyService, 
+              public route: ActivatedRoute) { }
 
   ngOnInit(): void {
    this.route.data.subscribe(data =>{ 
@@ -51,6 +53,7 @@ export class UserListComponent implements OnInit {
      .subscribe((res: PaginationResult<User[]>) => {
       this.users = res.result;
       this.pagination =res.pagination;
+      
     }, error => {
       console.log(error);
       this.alertify.error("Nie udało się pobrać")
